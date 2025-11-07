@@ -1,0 +1,22 @@
+# Node modules
+node_modules/
+
+# Playwright test outputs
+test-results/
+reports/
+dist/
+
+# IDE / Editor files
+.idea/
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
