@@ -1,6 +1,5 @@
 name: 🧪 Playwright + Cucumber BDD Tests
 
-# When to run the workflow
 on:
   push:
     branches: [ main ]
@@ -12,31 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout your project files from GitHub
       - name: ⬇️ Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Install Node.js (v20 is recommended for Playwright)
       - name: 🟢 Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 3️⃣ Install dependencies from package-lock.json
       - name: 📦 Install dependencies
         run: npm ci
 
-      # 4️⃣ Build the TypeScript project
-      - name: 🏗️ Build project
+      - name: 🎭 Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: 🏗️ Build TypeScript project
         run: npm run build
 
-      # 5️⃣ Run your Playwright + Cucumber tests
-      - name: 🧪 Run Cucumber Playwright tests
+      - name: 🧪 Run Playwright + Cucumber Tests
         run: npm test
 
-      # 6️⃣ Upload the HTML report as an artifact
-      - name: 📤 Upload HTML report as artifact
-        if: always() # even if tests fail, still upload the report
+      - name: 📤 Upload HTML Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Playwright-HTML-Report
